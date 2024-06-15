@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './add-contact.component.html',
   styleUrls: ['./add-contact.component.scss'],
 })
-export class AddContactComponent {
+export class AddContactComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
   addressForm: FormGroup = new FormGroup({
     address: new FormControl('', Validators.required),
@@ -24,12 +24,33 @@ export class AddContactComponent {
     latitude: new FormControl(6.458985, Validators.required),
   });
 
+  ngOnInit(): void {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) =>
+        this.getUserLocation(position)
+      );
+    }
+  }
+
+  getUserLocation(position: any) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    this.form.patchValue({
+      latitude,
+      longitude,
+    });
+  }
+
   get address() {
     return this.form.controls['address'] as FormArray<FormGroup>;
   }
 
   addAddress() {
-    this.address.push(this.addressForm);
+    this.address.push(
+      new FormGroup({
+        address: new FormControl('', Validators.required),
+      })
+    );
   }
 
   submit() {
@@ -47,6 +68,7 @@ export class AddContactComponent {
           email: this.form.value.email,
           longitude: this.form.value.longitude,
           latitude: this.form.value.latitude,
+          address: this.form.value.address[0].address,
         },
       });
     }

@@ -42,7 +42,8 @@
             />
             <p
               *ngIf="
-                form.controls['phone'].invalid && form.controls['phone'].touched
+                form.controls['phone'].invalid &&
+                (form.controls['phone'].touched || form.controls['phone'].dirty)
               "
               class="text-red-500"
             >
