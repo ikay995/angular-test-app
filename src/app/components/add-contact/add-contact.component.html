@@ -1,0 +1,125 @@
+<div class="flex justify-center items-center h-screen">
+  <div class="w-auto h-auto bg-white rounded-lg shadow-2xl text-black p-5">
+    <div class="text-center">
+      <h1 class="text-lg font-semibold tracking-wide">Contact Details</h1>
+      <h6 class="text-xs tracking-wide mt-2">Fill in your contact details</h6>
+    </div>
+    <form
+      class="mt-9 flex justify-center"
+      [formGroup]="form"
+      (ngSubmit)="submit()"
+    >
+      <div>
+        <div class="flex justify-between">
+          <label for="user-name" class="mt-1">Name*</label>
+          <div>
+            <input
+              type="text"
+              name="user-name"
+              id="user-name"
+              formControlName="name"
+              class="w96 py-2 outline-pink-500 shadow-xl rounded-md pl-3 mb-9"
+            />
+            <p
+              *ngIf="
+                form.controls['name'].invalid && form.controls['name'].touched
+              "
+              class="text-red-500"
+            >
+              Name is required
+            </p>
+          </div>
+        </div>
+        <div class="flex justify-between">
+          <label for="phone" class="mt-1">Phone*</label>
+          <div>
+            <input
+              type="text"
+              name="user-name"
+              id="phone"
+              formControlName="phone"
+              class="w96 py-2 outline-pink-500 shadow-xl rounded-md pl-3 mb-9"
+            />
+            <p
+              *ngIf="
+                form.controls['phone'].invalid && form.controls['phone'].touched
+              "
+              class="text-red-500"
+            >
+              Phone No is invalid
+            </p>
+          </div>
+        </div>
+        <div class="flex justify-between">
+          <label for="email" class="mt-1">Email*</label>
+          <div>
+            <input
+              type="text"
+              name="user-name"
+              id="email"
+              formControlName="email"
+              class="w96 py-2 outline-pink-500 shadow-xl rounded-md pl-3 mb-9"
+              #email
+            />
+            <p *ngIf="form.controls['email'].invalid" class="text-red-500">
+              Enter Valid Email
+            </p>
+          </div>
+        </div>
+        <div class="flex justify-between">
+          <label for="longitude" class="mt-1 mr-2">Longitude*</label>
+          <input
+            type="text"
+            name="user-name"
+            id="longitude"
+            formControlName="longitude"
+            class="w96 py-2 outline-pink-500 shadow-xl rounded-md pl-3 mb-9"
+            readonly
+          />
+        </div>
+        <div class="flex justify-between">
+          <label for="latitude" class="mt-1">Latitude*</label>
+          <input
+            type="text"
+            name="user-name"
+            id="latitude"
+            formControlName="latitude"
+            class="w96 py-2 outline-pink-500 shadow-xl rounded-md pl-3 mb-9"
+            readonly
+          />
+        </div>
+        <hr />
+        <div
+          class="flex justify-between mt-2"
+          *ngFor="let subForm of address.controls; let i = index"
+          [formGroup]="subForm"
+        >
+          <label for="address" class="mt-1">Address*</label>
+          <div>
+            <input
+              type="text"
+              name="user-name"
+              id="address"
+              formControlName="address"
+              class="w96 py-1 outline-pink-500 shadow-xl rounded-md pl-3 mb-9"
+            />
+            <mat-icon (click)="addAddress()">add</mat-icon>
+          </div>
+        </div>
+        <div class="text-center">
+          <input
+            type="submit"
+            value="submit"
+            class="hover:bg-blue-600 bg-pink-600 text-white rounded-md text-sm tracking-wide py-2 px-10 shadow-xl"
+          />
+          <p class="mt-6 text-sm tracking-wide">
+            for new reg
+            <a class="text-sm tracking-wide text-blue-600 font-semibold"
+              >Click here</a
+            >
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

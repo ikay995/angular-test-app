@@ -1,0 +1,38 @@
+<ng-container class="container mx-auto">
+  <h3 class="mx-auto items-center text-red-600">
+    Please Fill Contact information in the Add Contact section to view details
+    here!!!!
+  </h3>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8 table-auto fixed"
+  >
+    <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <!-- Phone Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>Phone</th>
+      <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <div class="map-container mx-auto" style="width: 30vw; height: 300px">
+    <div id="map" style="width: 500px; height: 320px"></div>
+  </div>
+</ng-container>
