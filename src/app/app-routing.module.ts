@@ -6,8 +6,7 @@ import { AddContactComponent } from './components/add-contact/add-contact.compon
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
+    component: DashboardComponent,
   },
   {
     path: 'dashboard',

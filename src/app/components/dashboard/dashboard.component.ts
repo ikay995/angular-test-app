@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
 
@@ -22,6 +22,11 @@ export class DashboardComponent implements OnInit {
   showMap: boolean = false;
   latitude: number = 51.505;
   longitude: number = -0.09;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.updateScreenSize(Math.min(window.screen.width, window.screen.height));
+  }
+  screenSize = Math.min(window.screen.width, window.screen.height);
 
   constructor(private route: ActivatedRoute) {}
 
@@ -33,6 +38,19 @@ export class DashboardComponent implements OnInit {
     }
     this.dataSource = [this.route.snapshot.queryParams];
     this.configMap();
+  }
+
+  updateScreenSize(screen: number) {
+    console.log(screen);
+    this.screenSize = screen;
+  }
+
+  get isMobile() {
+    console.log(
+      window.screen.width,
+      Math.min(window.screen.width, window.screen.height)
+    );
+    return this.screenSize < 600;
   }
 
   configMap() {

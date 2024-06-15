@@ -6,7 +6,7 @@
         <h6>Test</h6>
       </a>
     </div>
-    <div class="flex items-center">
+    <div *ngIf="!isMobile; else mobile" class="flex items-center">
       <div class="mr-5 hover:underline">
         <a href="#">FAQs</a>
       </div>
@@ -19,5 +19,20 @@
         </a>
       </div>
     </div>
+    <ng-template #mobile>
+      <div class="flex items-center">
+        <div class="mr-5 hover:underline">
+          <a routerLink="./contact">Add contact</a>
+        </div>
+        <div class="flex items-center bg-slate-600 py-2 px-2 rounded-md">
+          <a routerLink="./dashboard">
+            <div class="flex">
+              <mat-icon class="mr-1">account_circle</mat-icon>
+              <h5 class="ml-1">Dashboard</h5>
+            </div>
+          </a>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>

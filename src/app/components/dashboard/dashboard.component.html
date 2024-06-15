@@ -7,6 +7,7 @@
     mat-table
     [dataSource]="dataSource"
     class="mat-elevation-z8 table-auto fixed"
+    *ngIf="!isMobile"
   >
     <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -52,7 +53,85 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+  <div *ngIf="isMobile" class="mb-4">
+    <div
+      class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96"
+    >
+      <div class="p-6">
+        <h5
+          class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
+        >
+          Name
+        </h5>
+        <p
+          class="block font-sans text-base antialiased font-light leading-relaxed text-inherit"
+        >
+          {{ dataSource[0].name || "--" }}
+        </p>
+      </div>
+      <div class="p-6">
+        <h5
+          class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
+        >
+          Phone
+        </h5>
+        <p
+          class="block font-sans text-base antialiased font-light leading-relaxed text-inherit"
+        >
+          {{ dataSource[0].phone || "--" }}
+        </p>
+      </div>
+      <div class="p-6">
+        <h5
+          class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
+        >
+          Email
+        </h5>
+        <p
+          class="block font-sans text-base antialiased font-light leading-relaxed text-inherit"
+        >
+          {{ dataSource[0].email || "--" }}
+        </p>
+      </div>
+      <div class="p-6">
+        <h5
+          class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
+        >
+          Address
+        </h5>
+        <p
+          class="block font-sans text-base antialiased font-light leading-relaxed text-inherit"
+        >
+          {{ dataSource[0].address || "--" }}
+        </p>
+      </div>
+      <div class="p-6">
+        <h5
+          class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
+        >
+          Longitude
+        </h5>
+        <p
+          class="block font-sans text-base antialiased font-light leading-relaxed text-inherit"
+        >
+          {{ dataSource[0].longitude || "--" }}
+        </p>
+      </div>
+      <div class="p-6">
+        <h5
+          class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
+        >
+          Latitude
+        </h5>
+        <p
+          class="block font-sans text-base antialiased font-light leading-relaxed text-inherit"
+        >
+          {{ dataSource[0].latitude || "--" }}
+        </p>
+      </div>
+    </div>
+  </div>
   <div class="map-container mx-auto" style="width: 30vw; height: 300px">
-    <div id="map" style="width: 500px; height: 300px"></div>
+    <div id="map" [ngClass]="{ mobile: isMobile, desktop: !isMobile }"></div>
   </div>
 </ng-container>

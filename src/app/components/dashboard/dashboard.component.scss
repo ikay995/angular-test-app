@@ -1,8 +1,24 @@
 .map-container {
   height: 400px;
-  #map {
-    left: 30;
-    bottom: 0;
-    position: absolute;
+}
+.table-div {
+  overflow-x: scroll;
+  .tableMob {
+    display: flex;
   }
+}
+.desktop {
+  right: 40px;
+  top: 130px;
+  bottom: 0;
+  position: absolute;
+  width: 500px;
+  height: 300px;
+}
+.mobile {
+  right: 60px;
+  width: 250px;
+  height: 100px;
+  position: relative;
+  margin-right: 20px;
 }

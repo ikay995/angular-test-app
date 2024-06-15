@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -8,10 +8,15 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./add-contact.component.scss'],
 })
 export class AddContactComponent implements OnInit {
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.updateScreenSize(event.target.innerWidth);
+  }
   constructor(private router: Router, private route: ActivatedRoute) {}
   addressForm: FormGroup = new FormGroup({
     address: new FormControl('', Validators.required),
   });
+  screenSize = Math.min(window.screen.width, window.screen.height);
   form: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
     phone: new FormControl('', [
@@ -30,6 +35,19 @@ export class AddContactComponent implements OnInit {
         this.getUserLocation(position)
       );
     }
+  }
+
+  updateScreenSize(screen: number) {
+    console.log(screen);
+    this.screenSize = screen;
+  }
+
+  get isMobile() {
+    console.log(
+      window.screen.width,
+      Math.min(window.screen.width, window.screen.height)
+    );
+    return this.screenSize < 600;
   }
 
   getUserLocation(position: any) {

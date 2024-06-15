@@ -1,9 +1,9 @@
-<app-top-navbar></app-top-navbar>
+<app-top-navbar [isMobile]="isMobile"></app-top-navbar>
 <div class="mx-2">
-  <div class="w-56 bg-rose-500 h-full fixed z-10 rounded-md">
+  <div *ngIf="!isMobile" class="w-56 bg-rose-500 h-full fixed z-10 rounded-md">
     <app-side-navbar></app-side-navbar>
   </div>
-  <div class="ml-56 pl-2">
+  <div class="pl-2" [ngClass]="{ 'mr-5': isMobile, 'ml-56': !isMobile }">
     <router-outlet></router-outlet>
   </div>
 </div>
